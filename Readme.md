@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Эльвина Ибрагимова](https://up.htmlacademy.ru/javascript/14/user/229617).
-* Наставник: Дмитрий Маров.
+* Наставник: [Дмитрий Маров] (https://github.com/DmitriVanGuard)
 
 ---
 
