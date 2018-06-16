@@ -32,7 +32,7 @@ var createArrayOfPhotos = function () {
   var photos = [];
   for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
     var photo = {};
-    photo.url = `photos/${i + 1}.jpg`;
+    photo.url = 'photos/' + (i + 1) + '.jpg';
     photo.likes = randomInteger(MIN_LIKES, MAX_LIKES);
 
     if (randomInteger(MIN_NUMBER_OF_COMMEMT, MAX_NUMBER_OF_COMMEMT) === 2) {
@@ -79,8 +79,8 @@ similarPhotoListElement.appendChild(fragment);
 
 var bigPhoto = document.querySelector('.big-picture');
 
-var showBigPhoto = function (bigPhoto, photo) {
-  bigPhoto.classList.remove('hidden');
+var showBigPhoto = function (bigPhotoElement, photo) {
+  bigPhotoElement.classList.remove('hidden');
 
   document.querySelector('.big-picture__img').src = photo.url;
   document.querySelector('.likes-count').textContent = photo.likes;
@@ -92,7 +92,7 @@ var showBigPhoto = function (bigPhoto, photo) {
   var bigPhotoCommentText = document.querySelector('.social__text');
 
   for (var i = 0; i < photo.comments.length; i++) {
-    bigPhotoCommentPicture.src = `img/avatar-${randomInteger(1, 6)}.svg`;
+    bigPhotoCommentPicture.src = 'img/avatar-' + (randomInteger(1, 6)) + '.svg';
     bigPhotoCommentText.textContent = photo.comments[i];
     bigPhotoCommentList.appendChild(bigPhotoCommentElement);
   }
