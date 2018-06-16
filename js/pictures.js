@@ -30,7 +30,6 @@ var randomInteger = function (min, max) {
 
 var createArrayOfPhotos = function () {
   var photos = [];
-
   for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
     var photo = {};
     photo.url = `photos/${i + 1}.jpg`;
@@ -50,6 +49,53 @@ var createArrayOfPhotos = function () {
     photo.description = [arrayOfDescription[randomInteger(0, arrayOfDescription.length - 1)]];
     photos.push(photo);
   }
+  return photos;
 };
 
-createArrayOfPhotos();
+var photos = createArrayOfPhotos();
+
+var similarPhotoListElement = document.querySelector('.pictures');
+
+var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
+
+var renderPhoto = function (photo) {
+  var photoElement = similarPhotoTemplate.cloneNode(true);
+
+  photoElement.querySelector('.picture__img').src = photo.url;
+  photoElement.querySelector('.picture__stat--likes').textContent = photo.likes;
+  photoElement.querySelector('.picture__stat--comments').textContent = photo.comments.length;
+
+  return photoElement;
+};
+
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
+
+  fragment.appendChild(renderPhoto(photos[i]));
+}
+
+similarPhotoListElement.appendChild(fragment);
+
+var bigPhoto = document.querySelector('.big-picture');
+
+var showBigPhoto = function (bigPhoto, photo) {
+  bigPhoto.classList.remove('hidden');
+
+  document.querySelector('.big-picture__img').src = photo.url;
+  document.querySelector('.likes-count').textContent = photo.likes;
+  document.querySelector('.comments-count').textContent = photo.comments.length;
+
+  var bigPhotoCommentElement = document.querySelector('.social__comment').cloneNode(true);
+  var bigPhotoCommentList = document.querySelector('.social__comments');
+  var bigPhotoCommentPicture = document.querySelector('.social__picture');
+  var bigPhotoCommentText = document.querySelector('.social__text');
+
+  for (var i = 0; i < photo.comments.length; i++) {
+    bigPhotoCommentPicture.src = `img/avatar-${randomInteger(1, 6)}.svg`;
+    bigPhotoCommentText.textContent = photo.comments[i];
+    bigPhotoCommentList.appendChild(bigPhotoCommentElement);
+  }
+};
+
+showBigPhoto(bigPhoto, photos[0]);
