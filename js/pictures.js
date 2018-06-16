@@ -91,7 +91,7 @@ var showBigPhoto = function (bigPhotoElement, photo) {
   var bigPhotoCommentPicture = document.querySelector('.social__picture');
   var bigPhotoCommentText = document.querySelector('.social__text');
 
-  for (var i = 0; i < photo.comments.length; i++) {
+  for (i = 0; i < photo.comments.length; i++) {
     bigPhotoCommentPicture.src = 'img/avatar-' + (randomInteger(1, 6)) + '.svg';
     bigPhotoCommentText.textContent = photo.comments[i];
     bigPhotoCommentList.appendChild(bigPhotoCommentElement);
