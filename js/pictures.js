@@ -72,15 +72,15 @@ var detailedPhoto = document.querySelector('.big-picture');
 var showDetailedPhoto = function (detailedPhotoElement, photo) {
   detailedPhotoElement.classList.remove('hidden');
 
-  document.querySelector('.big-picture__img').src = photo.url;
-  document.querySelector('.likes-count').textContent = photo.likes;
-  document.querySelector('.comments-count').textContent = photo.comments.length;
+  detailedPhoto.querySelector('.big-picture__img').src = photo.url;
+  detailedPhoto.querySelector('.likes-count').textContent = photo.likes;
+  detailedPhoto.querySelector('.comments-count').textContent = photo.comments.length;
 
-  var detailedPhotoCommentElement = document.querySelector('.social__comment').cloneNode(true);
-  var detailedPhotoCommentList = document.querySelector('.social__comments');
-  var detailedPhotoPicture = document.querySelector('.social__picture');
-  var detailedPhotoText = document.querySelector('.social__text');
-  var detailedPhotoDescription = document.querySelector('.social__caption');
+  var detailedPhotoCommentElement = detailedPhoto.querySelector('.social__comment').cloneNode(true);
+  var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
+  var detailedPhotoPicture = detailedPhoto.querySelector('.social__picture');
+  var detailedPhotoText = detailedPhoto.querySelector('.social__text');
+  var detailedPhotoDescription = detailedPhoto.querySelector('.social__caption');
 
   detailedPhotoDescription.textContent = photo.description;
 
