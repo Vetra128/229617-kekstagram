@@ -49,7 +49,7 @@ var createArrayOfPhotos = function () {
     photo.url = 'photos/' + i + '.jpg';
     photo.likes = randomInteger(MIN_LIKES, MAX_LIKES);
     fillPhotoComments(photo);
-    photo.description = [ARRAY_OF_DESCRIPTIONS[randomInteger(0, LengthArrayOfDescriptions - 1)]];
+    photo.description = ARRAY_OF_DESCRIPTIONS[randomInteger(0, LengthArrayOfDescriptions - 1)];
     photos.push(photo);
   }
   return photos;
