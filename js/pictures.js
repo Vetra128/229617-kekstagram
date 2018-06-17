@@ -5,7 +5,7 @@ var MIN_LIKES = 15;
 var MAX_LIKES = 200;
 var MIN_NUMBER_OF_COMMEMT = 1;
 var MAX_NUMBER_OF_COMMEMT = 2;
-var arrayOfComment = [
+var ARRAY_OF_COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -13,7 +13,7 @@ var arrayOfComment = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-var arrayOfDescription = [
+var ARRAY_OF_DESCRIPTIONS = [
   'Тестим новую камеру!',
   'Затусили с друзьями на море',
   'Как же круто тут кормят',
@@ -36,17 +36,17 @@ var createArrayOfPhotos = function () {
     photo.likes = randomInteger(MIN_LIKES, MAX_LIKES);
 
     if (randomInteger(MIN_NUMBER_OF_COMMEMT, MAX_NUMBER_OF_COMMEMT) === 2) {
-      var firstComment = arrayOfComment[randomInteger(0, arrayOfComment.length - 1)];
-      var secondComment = arrayOfComment[randomInteger(0, arrayOfComment.length - 1)];
+      var firstComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
+      var secondComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
       while (firstComment === secondComment) {
-        secondComment = arrayOfComment[randomInteger(0, arrayOfComment.length - 1)];
+        secondComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
       }
       photo.comments = [firstComment, secondComment];
     } else {
-      photo.comments = [arrayOfComment[randomInteger(0, arrayOfComment.length - 1)]];
+      photo.comments = [ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)]];
     }
 
-    photo.description = [arrayOfDescription[randomInteger(0, arrayOfDescription.length - 1)]];
+    photo.description = [ARRAY_OF_DESCRIPTIONS[randomInteger(0, ARRAY_OF_DESCRIPTIONS.length - 1)]];
     photos.push(photo);
   }
   return photos;
