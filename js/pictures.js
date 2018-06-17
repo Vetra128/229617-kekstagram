@@ -28,9 +28,9 @@ var randomInteger = function (min, max) {
 
 var createArrayOfPhotos = function () {
   var photos = [];
-  for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
+  for (var i = 1; i <= NUMBER_OF_PHOTOS; i++) {
     var photo = {};
-    photo.url = 'photos/' + (i + 1) + '.jpg';
+    photo.url = 'photos/' + i + '.jpg';
     photo.likes = randomInteger(MIN_LIKES, MAX_LIKES);
 
     if (randomInteger(MIN_NUMBER_OF_COMMEMT, MAX_NUMBER_OF_COMMEMT) === 2) {
