@@ -93,6 +93,9 @@ var showBigPhoto = function (bigPhotoElement, photo) {
   var bigPhotoCommentList = document.querySelector('.social__comments');
   var bigPhotoCommentPicture = document.querySelector('.social__picture');
   var bigPhotoCommentText = document.querySelector('.social__text');
+  var bigPhotoDescription = document.querySelector('.social__caption');
+
+  bigPhotoDescription.textContent = photo.description;
 
   for (i = 0; i < photo.comments.length; i++) {
     bigPhotoCommentPicture.src = 'img/avatar-' + (randomInteger(1, 6)) + '.svg';
