@@ -55,11 +55,7 @@ var createArrayOfPhotos = function () {
   return photos;
 };
 
-var photos = createArrayOfPhotos();
-
-var similarPhotoListElement = document.querySelector('.pictures');
-
-var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
+var similarPhotoTemplate = document.querySelector('#picture').content;
 
 var renderPhoto = function (photo) {
   var photoElement = similarPhotoTemplate.cloneNode(true);
@@ -70,15 +66,6 @@ var renderPhoto = function (photo) {
 
   return photoElement;
 };
-
-var fragment = document.createDocumentFragment();
-
-for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
-
-  fragment.appendChild(renderPhoto(photos[i]));
-}
-
-similarPhotoListElement.appendChild(fragment);
 
 var bigPhoto = document.querySelector('.big-picture');
 
@@ -108,5 +95,18 @@ var showBigPhoto = function (bigPhotoElement, photo) {
   bigPhotoCounterOfComment.classList.add('visually-hidden');
   bigPhotoLoadmore.classList.add('visually-hidden');
 };
+
+var photos = createArrayOfPhotos();
+
+var similarPhotoListElement = document.querySelector('.pictures');
+
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
+
+  fragment.appendChild(renderPhoto(photos[i]));
+}
+
+similarPhotoListElement.appendChild(fragment);
 
 showBigPhoto(bigPhoto, photos[0]);
