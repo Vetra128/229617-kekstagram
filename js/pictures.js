@@ -102,6 +102,11 @@ var showBigPhoto = function (bigPhotoElement, photo) {
     bigPhotoCommentText.textContent = photo.comments[i];
     bigPhotoCommentList.appendChild(bigPhotoCommentElement);
   }
+
+  var bigPhotoCounterOfComment = document.querySelector('.social__comment-count');
+  var bigPhotoLoadmore = document.querySelector('.social__loadmore');
+  bigPhotoCounterOfComment.classList.add('visually-hidden');
+  bigPhotoLoadmore.classList.add('visually-hidden');
 };
 
 showBigPhoto(bigPhoto, photos[0]);
