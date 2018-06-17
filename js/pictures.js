@@ -57,7 +57,7 @@ var createArrayOfPhotos = function () {
 
 var similarPhotoTemplate = document.querySelector('#picture').content;
 
-var renderPhoto = function (photo) {
+var createPhoto = function (photo) {
   var photoElement = similarPhotoTemplate.cloneNode(true);
 
   photoElement.querySelector('.picture__img').src = photo.url;
@@ -104,7 +104,7 @@ var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
 
-  fragment.appendChild(renderPhoto(photos[i]));
+  fragment.appendChild(createPhoto(photos[i]));
 }
 
 similarPhotoListElement.appendChild(fragment);
