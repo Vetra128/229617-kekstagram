@@ -26,6 +26,9 @@ var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+var LengthArrayOfComments = ARRAY_OF_COMMENTS.length;
+var LengthArrayOfDescriptions = ARRAY_OF_DESCRIPTIONS.length;
+
 var createArrayOfPhotos = function () {
   var photos = [];
   for (var i = 1; i <= NUMBER_OF_PHOTOS; i++) {
@@ -34,17 +37,17 @@ var createArrayOfPhotos = function () {
     photo.likes = randomInteger(MIN_LIKES, MAX_LIKES);
 
     if (randomInteger(MIN_NUMBER_OF_COMMEMT, MAX_NUMBER_OF_COMMEMT) === 2) {
-      var firstComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
-      var secondComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
+      var firstComment = ARRAY_OF_COMMENTS[randomInteger(0, LengthArrayOfComments - 1)];
+      var secondComment = ARRAY_OF_COMMENTS[randomInteger(0, LengthArrayOfComments - 1)];
       while (firstComment === secondComment) {
-        secondComment = ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)];
+        secondComment = ARRAY_OF_COMMENTS[randomInteger(0, LengthArrayOfComments - 1)];
       }
       photo.comments = [firstComment, secondComment];
     } else {
-      photo.comments = [ARRAY_OF_COMMENTS[randomInteger(0, ARRAY_OF_COMMENTS.length - 1)]];
+      photo.comments = [ARRAY_OF_COMMENTS[randomInteger(0, LengthArrayOfComments - 1)]];
     }
 
-    photo.description = [ARRAY_OF_DESCRIPTIONS[randomInteger(0, ARRAY_OF_DESCRIPTIONS.length - 1)]];
+    photo.description = [ARRAY_OF_DESCRIPTIONS[randomInteger(0, LengthArrayOfDescriptions - 1)]];
     photos.push(photo);
   }
   return photos;
