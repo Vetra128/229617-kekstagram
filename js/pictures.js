@@ -89,8 +89,10 @@ var showDetailedPhoto = function (detailedPhotoElement, photo) {
   for (i = 0; i < photo.comments.length; i++) {
     detailedPhotoPicture.src = 'img/avatar-' + (randomInteger(MIN_INDEX_AVATAR, MAX_INDEX_AVATAR)) + '.svg';
     detailedPhotoText.textContent = photo.comments[i];
-    detailedPhotoCommentList.appendChild(detailedPhotoCommentElement);
+    fragment.appendChild(detailedPhotoCommentElement);
   }
+
+  detailedPhotoCommentList.appendChild(fragment);
 
   var detailedPhotoCounterOfComment = document.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = document.querySelector('.social__loadmore');
