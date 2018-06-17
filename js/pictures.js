@@ -21,6 +21,8 @@ var ARRAY_OF_DESCRIPTIONS = [
   'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
   'Вот это тачка!'
 ];
+var MIN_INDEX_AVATAR = 1;
+var MAX_INDEX_AVATAR = 6;
 
 var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -85,7 +87,7 @@ var showDetailedPhoto = function (detailedPhotoElement, photo) {
   detailedPhotoDescription.textContent = photo.description;
 
   for (i = 0; i < photo.comments.length; i++) {
-    detailedPhotoPicture.src = 'img/avatar-' + (randomInteger(1, 6)) + '.svg';
+    detailedPhotoPicture.src = 'img/avatar-' + (randomInteger(MIN_INDEX_AVATAR, MAX_INDEX_AVATAR)) + '.svg';
     detailedPhotoText.textContent = photo.comments[i];
     detailedPhotoCommentList.appendChild(detailedPhotoCommentElement);
   }
