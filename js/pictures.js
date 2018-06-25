@@ -31,8 +31,16 @@ var ENTER_KEYCODE = 13;
 var uploadFile = document.querySelector('#upload-file');
 var uploadImageForm = document.querySelector('.img-upload__overlay');
 var uploadImageFormClose = document.querySelector('#upload-cancel');
-var uploadImageFormBody = document.querySelector('.img-upload__wrapper');
 var scalePin = uploadImageForm.querySelector('.scale__pin');
+var scaleLine = uploadImageForm.querySelector('.scale__line');
+var scaleValue = uploadImageForm.querySelector('.scale__value');
+var effectPrewList = uploadImageForm.querySelector('.effects__list');
+var imgPreview = uploadImageForm.querySelector('.img-upload__preview');
+var imgPreviewMainClass = 'img-upload__preview';
+var picturesGalery = document.querySelector('.pictures');
+var detailedPhoto = document.querySelector('.big-picture');
+var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
+
 var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -74,18 +82,18 @@ var createPhoto = function (photo) {
   return photography;
 };
 
-var showDetailedPhoto = function (detailedPhoto, photo) {
-  detailedPhoto.classList.remove('hidden');
+var showDetailedPhoto = function (detailedBigPhoto, photo) {
+  detailedBigPhoto.classList.remove('hidden');
 
-  detailedPhoto.querySelector('.big-picture__img').src = photo.url;
-  detailedPhoto.querySelector('.likes-count').textContent = photo.likes;
-  detailedPhoto.querySelector('.comments-count').textContent = photo.comments.length;
+  detailedBigPhoto.querySelector('.big-picture__img').src = photo.url;
+  detailedBigPhoto.querySelector('.likes-count').textContent = photo.likes;
+  detailedBigPhoto.querySelector('.comments-count').textContent = photo.comments.length;
 
-  var detailedPhotoComment = detailedPhoto.querySelector('.social__comment').cloneNode(true);
-  var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
-  var detailedPhotoPicture = detailedPhoto.querySelector('.social__picture');
-  var detailedPhotoText = detailedPhoto.querySelector('.social__text');
-  var detailedPhotoDescription = detailedPhoto.querySelector('.social__caption');
+  var detailedPhotoComment = detailedBigPhoto.querySelector('.social__comment').cloneNode(true);
+  var detailedPhotoCommentList = detailedBigPhoto.querySelector('.social__comments');
+  var detailedPhotoPicture = detailedBigPhoto.querySelector('.social__picture');
+  var detailedPhotoText = detailedBigPhoto.querySelector('.social__text');
+  var detailedPhotoDescription = detailedBigPhoto.querySelector('.social__caption');
   var fragment = document.createDocumentFragment();
 
   detailedPhotoDescription.textContent = photo.description;
@@ -115,8 +123,6 @@ var createPhotoList = function () {
   similarPhotoList.appendChild(fragment);
 };
 
-var detailedPhoto = document.querySelector('.big-picture');
-
 var photos = createArrayOfPhotos();
 
 createPhotoList();
@@ -131,23 +137,19 @@ var onPopupEscPress = function (evt) {
   }
 };
 
-var onPopupClick = function (evt) {
-  evt.stopPropagation();
-};
-
 var openUploadImageForm = function () {
   uploadImageForm.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
-  // uploadImageFormBody.addEventListener('click', onPopupClick);
-  // uploadImageForm.addEventListener('click', closeUploadImageForm);
+  scalePin.addEventListener('mouseup', changeSclaePin);
+  effectPrewList.addEventListener('click', changeEffect);
 };
 
 var closeUploadImageForm = function () {
   uploadImageForm.classList.add('hidden');
   uploadFile.value = '';
   document.removeEventListener('keydown', onPopupEscPress);
-  uploadImageForm.removeEventListener('click', closeUploadImageForm);
-  uploadImageFormBody.removeEventListener('click', onPopupClick);
+  scalePin.removeEventListener('mouseup', changeSclaePin);
+  effectPrewList.removeEventListener('click', changeEffect);
 };
 
 uploadFile.addEventListener('change', function () {
@@ -161,5 +163,78 @@ uploadImageFormClose.addEventListener('click', function () {
 uploadImageFormClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closeUploadImageForm();
+  }
+});
+
+var modifire;
+
+var changeSclaePin = function (evt) {
+  var SCALE_LINE_LENGTH = 450;
+  var PERCENTS_MAX = 100;
+  var PHOBOS_BLURE_MAX = 3;
+  var BRIGHTNES_MIN = 1;
+  var BRIGHTNES_MAX = 3;
+  var scaleLineX = scaleLine.getBoundingClientRect().x;
+  scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
+
+  switch (modifire.value) {
+    case 'chrome':
+      imgPreview.style.filter = 'filter: grayscale(' + scaleValue.value / PERCENTS_MAX + ')';
+      break;
+    case 'sepia':
+      imgPreview.style.filter = 'filter: sepia(' + scaleValue.value / PERCENTS_MAX + ')';
+      break;
+    case 'marvin':
+      imgPreview.style.filter = 'filter: invert(' + scaleValue.value + '%)';
+      break;
+    case 'phobos':
+      imgPreview.style.filter = 'filter: blur(' + (scaleValue.value * PHOBOS_BLURE_MAX / PERCENTS_MAX) + 'px)';
+      break;
+    case 'heat':
+      imgPreview.style.filter = 'filter: brightness(' + (BRIGHTNES_MIN + scaleValue.value * (BRIGHTNES_MAX - BRIGHTNES_MIN) / PERCENTS_MAX) + ')';
+      break;
+    default:
+      break;
+  }
+};
+
+var changeEffect = function (evt) {
+  if (evt.target.classList.contains('effects__radio')) {
+    scaleValue.value = 0;
+    imgPreview.classList = imgPreviewMainClass;
+    modifire = evt.target;
+    if (modifire.value !== 'none') {
+      imgPreview.classList.add('effects__preview--' + modifire.value);
+    }
+  }
+};
+
+var onDetaliedPhotoEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeDetaliedPhoto();
+  }
+};
+
+var onDetaliedPhotoClosePress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeDetaliedPhoto();
+  }
+};
+
+var closeDetaliedPhoto = function () {
+  detailedPhoto.classList.add('hidden');
+  document.removeEventListener('keydown', onDetaliedPhotoEscPress);
+};
+
+var openDetaliedPhoto = function () {
+  detailedPhoto.classList.remove('hidden');
+  document.addEventListener('keydown', onDetaliedPhotoEscPress);
+  detailedPhotoCloseBtn.addEventListener('click', closeDetaliedPhoto);
+  detailedPhotoCloseBtn.addEventListener('keydown', onDetaliedPhotoClosePress);
+};
+
+picturesGalery.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('picture__img')) {
+    openDetaliedPhoto();
   }
 });
