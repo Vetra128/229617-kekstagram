@@ -839,6 +839,10 @@ main {
   border-radius: 5px;
 }
 
+.text__hashtags:invalid {
+  border-color: red;
+}
+
 .text__description {
   width: 450px;
   height: 100px;
@@ -853,6 +857,9 @@ main {
   border-radius: 5px;
 }
 
+.text__description:invalid {
+  border-color: red;
+}
 
 /* Кнопка отправки формы */
 
