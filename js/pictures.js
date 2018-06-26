@@ -171,7 +171,6 @@ uploadImageFormClose.addEventListener('keydown', function (evt) {
   }
 });
 
-
 var changeScalePin = function (evt) {
   var scaleLineX = scaleLine.getBoundingClientRect().x;
   scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
