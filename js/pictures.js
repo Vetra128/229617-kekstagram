@@ -240,3 +240,48 @@ picturesGalery.addEventListener('click', function (evt) {
     openDetaliedPhoto();
   }
 });
+
+//работа с хэш-тегом
+
+var validityHashtags = function () {
+  var hashtagsInput = document.querySelector('.text__hashtags');
+  var hashtags = hashtagsInput.split(' ');
+
+  if (hashtags.length > 4) {
+    hashtagsInput.validate(false);
+    hashtagsInput.setCustomValidity('максимальное количество хэштегов - 5');
+    return;
+  } else if (hashtags.length > 0) {
+    for (var i = 0; i < hashtags.length; i++) {
+      if (hashtags[i].length < 2) {
+        hashtagsInput.validate(false);
+        hashtagsInput.setCustomValidity('Длина хэштега должна быть больше 2 символов');
+        return;
+      } else if (hashtags[i].length > 20) {
+        hashtagsInput.validate(false);
+        hashtagsInput.setCustomValidity('Длина хэштега должна быть меньше 20 символов');
+        return;
+      } else if (hashtags[i][0] !== '#') {
+        hashtagsInput.validate(false);
+        hashtagsInput.setCustomValidity('Хэштег должен начинаться с символа #');
+        return;
+      }
+      for (var j = 1; j < hashtags[i].length; j++) {
+        if (hashtags[i][j] === '#') {
+          hashtagsInput.validate(false);
+          hashtagsInput.setCustomValidity('Хэштег не должен иметь внутри символ #');
+          return;
+        }
+      }
+    }
+  }
+
+  for (i = 0; i < hashtags.length; i++) {
+    for (j = 0; j < hashtags.length; j++) {
+      if (hashtags[i] === hashtags[j]) {
+        hashtagsInput.setCustomValidity('Не должно быть одинаковых хэштегов');
+        return;
+      }
+    }
+  }
+};
