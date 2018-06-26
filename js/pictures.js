@@ -27,6 +27,11 @@ var INDEX_COMMENT_MAX = COMMENTS.length - 1;
 var INDEX_DESCRIPTION_MAX = DESCRIPTIONS.length - 1;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
+var SCALE_LINE_LENGTH = 450;
+var PERCENTS_MAX = 100;
+var PHOBOS_BLURE_MAX = 3;
+var BRIGHTNES_MIN = 1;
+var BRIGHTNES_MAX = 3;
 
 var uploadFile = document.querySelector('#upload-file');
 var uploadImageForm = document.querySelector('.img-upload__overlay');
@@ -36,10 +41,10 @@ var scaleLine = uploadImageForm.querySelector('.scale__line');
 var scaleValue = uploadImageForm.querySelector('.scale__value');
 var effectPrewList = uploadImageForm.querySelector('.effects__list');
 var imgPreview = uploadImageForm.querySelector('.img-upload__preview');
-var imgPreviewMainClass = 'img-upload__preview';
 var picturesGalery = document.querySelector('.pictures');
 var detailedPhoto = document.querySelector('.big-picture');
 var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
+var modifire;
 
 var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -140,7 +145,7 @@ var onPopupEscPress = function (evt) {
 var openUploadImageForm = function () {
   uploadImageForm.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
-  scalePin.addEventListener('mouseup', changeSclaePin);
+  scalePin.addEventListener('mouseup', changeScalePin);
   effectPrewList.addEventListener('click', changeEffect);
 };
 
@@ -148,7 +153,7 @@ var closeUploadImageForm = function () {
   uploadImageForm.classList.add('hidden');
   uploadFile.value = '';
   document.removeEventListener('keydown', onPopupEscPress);
-  scalePin.removeEventListener('mouseup', changeSclaePin);
+  scalePin.removeEventListener('mouseup', changeScalePin);
   effectPrewList.removeEventListener('click', changeEffect);
 };
 
@@ -166,42 +171,40 @@ uploadImageFormClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var modifire;
 
-var changeSclaePin = function (evt) {
-  var SCALE_LINE_LENGTH = 450;
-  var PERCENTS_MAX = 100;
-  var PHOBOS_BLURE_MAX = 3;
-  var BRIGHTNES_MIN = 1;
-  var BRIGHTNES_MAX = 3;
+var changeScalePin = function (evt) {
   var scaleLineX = scaleLine.getBoundingClientRect().x;
   scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
-
-  switch (modifire.value) {
-    case 'chrome':
-      imgPreview.style.filter = 'filter: grayscale(' + scaleValue.value / PERCENTS_MAX + ')';
-      break;
-    case 'sepia':
-      imgPreview.style.filter = 'filter: sepia(' + scaleValue.value / PERCENTS_MAX + ')';
-      break;
-    case 'marvin':
-      imgPreview.style.filter = 'filter: invert(' + scaleValue.value + '%)';
-      break;
-    case 'phobos':
-      imgPreview.style.filter = 'filter: blur(' + (scaleValue.value * PHOBOS_BLURE_MAX / PERCENTS_MAX) + 'px)';
-      break;
-    case 'heat':
-      imgPreview.style.filter = 'filter: brightness(' + (BRIGHTNES_MIN + scaleValue.value * (BRIGHTNES_MAX - BRIGHTNES_MIN) / PERCENTS_MAX) + ')';
-      break;
-    default:
-      break;
+  if (modifire) {
+    switch (modifire.value) {
+      case 'chrome':
+        imgPreview.style.filter = 'grayscale(' + scaleValue.value / PERCENTS_MAX + ')';
+        break;
+      case 'sepia':
+        imgPreview.style.filter = 'sepia(' + scaleValue.value / PERCENTS_MAX + ')';
+        break;
+      case 'marvin':
+        imgPreview.style.filter = 'invert(' + scaleValue.value + '%)';
+        break;
+      case 'phobos':
+        imgPreview.style.filter = 'blur(' + (scaleValue.value * PHOBOS_BLURE_MAX / PERCENTS_MAX) + 'px)';
+        break;
+      case 'heat':
+        imgPreview.style.filter = 'brightness(' + (BRIGHTNES_MIN + scaleValue.value * (BRIGHTNES_MAX - BRIGHTNES_MIN) / PERCENTS_MAX) + ')';
+        break;
+      default:
+        break;
+    }
   }
 };
 
 var changeEffect = function (evt) {
   if (evt.target.classList.contains('effects__radio')) {
     scaleValue.value = 0;
-    imgPreview.classList = imgPreviewMainClass;
+    if (modifire) {
+      imgPreview.classList.remove('effects__preview--' + modifire.value);
+      imgPreview.style.filter = '';
+    }
     modifire = evt.target;
     if (modifire.value !== 'none') {
       imgPreview.classList.add('effects__preview--' + modifire.value);
