@@ -45,6 +45,8 @@ var picturesGalery = document.querySelector('.pictures');
 var detailedPhoto = document.querySelector('.big-picture');
 var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
 var modifire;
+var hashtagsInput = document.querySelector('.text__hashtags');
+var commentsTextarea = document.querySelector('.text__description');
 
 var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -241,14 +243,14 @@ picturesGalery.addEventListener('click', function (evt) {
   }
 });
 
-//работа с хэш-тегом
-var hashtagsInput = document.querySelector('.text__hashtags');
 
 var validityHashtags = function () {
   var hashtags = hashtagsInput.value.trim().toLowerCase().split(' ');
   hashtagsInput.setCustomValidity('');
 
-  if (hashtags.length > 4) {
+  if (hashtagsInput.value.trim() === '') {
+    return;
+  } else if (hashtags.length > 5) {
     hashtagsInput.setCustomValidity('максимальное количество хэштегов - 5');
     return;
   } else if (hashtags.length > 0) {
@@ -271,7 +273,6 @@ var validityHashtags = function () {
       }
     }
   }
-
   for (i = 0; i < hashtags.length; i++) {
     for (j = 0; j < hashtags.length; j++) {
       if ((hashtags[i] === hashtags[j]) && (i !== j)) {
@@ -282,7 +283,14 @@ var validityHashtags = function () {
   }
 };
 
-hashtagsInput.addEventListener('blur', validityHashtags);
-hashtagsInput.addEventListener('keydown', );
+var onFieldFocusEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    evt.stopPropagation();
+  }
+};
+
+hashtagsInput.addEventListener('change', validityHashtags);
+hashtagsInput.addEventListener('keydown', onFieldFocusEscPress);
+commentsTextarea.addEventListener('keydown', onFieldFocusEscPress);
 
 
