@@ -147,16 +147,16 @@ var onPopupEscPress = function (evt) {
 var openUploadImageForm = function () {
   uploadImageForm.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
-  scalePin.addEventListener('mouseup', changeScalePin);
-  effectPrewList.addEventListener('click', changeEffect);
+  scalePin.addEventListener('mouseup', onChangeScalePin);
+  effectPrewList.addEventListener('click', onChangeEffect);
 };
 
 var closeUploadImageForm = function () {
   uploadImageForm.classList.add('hidden');
   uploadFile.value = '';
   document.removeEventListener('keydown', onPopupEscPress);
-  scalePin.removeEventListener('mouseup', changeScalePin);
-  effectPrewList.removeEventListener('click', changeEffect);
+  scalePin.removeEventListener('mouseup', onChangeScalePin);
+  effectPrewList.removeEventListener('click', onChangeEffect);
 };
 
 uploadFile.addEventListener('change', function () {
@@ -173,7 +173,7 @@ uploadImageFormClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var changeScalePin = function (evt) {
+var onChangeScalePin = function (evt) {
   var scaleLineX = scaleLine.getBoundingClientRect().x;
   scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
   if (modifire) {
@@ -199,7 +199,7 @@ var changeScalePin = function (evt) {
   }
 };
 
-var changeEffect = function (evt) {
+var onChangeEffect = function (evt) {
   if (evt.target.classList.contains('effects__radio')) {
     scaleValue.value = 0;
     if (modifire) {
@@ -244,7 +244,7 @@ picturesGalery.addEventListener('click', function (evt) {
 });
 
 
-var validityHashtags = function () {
+var onHashtagsValidity = function () {
   var hashtags = hashtagsInput.value.trim().toLowerCase().split(' ');
   hashtagsInput.setCustomValidity('');
 
@@ -289,7 +289,7 @@ var onFieldFocusEscPress = function (evt) {
   }
 };
 
-hashtagsInput.addEventListener('change', validityHashtags);
+hashtagsInput.addEventListener('change', onHashtagsValidity);
 hashtagsInput.addEventListener('keydown', onFieldFocusEscPress);
 commentsTextarea.addEventListener('keydown', onFieldFocusEscPress);
 
