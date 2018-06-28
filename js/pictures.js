@@ -275,7 +275,6 @@ var onHashtagsValidity = function () {
     hashtagsInput.setCustomValidity('максимальное количество хэштегов - 5');
     return;
   }
-
   if (hashtags.length > 0) {
     for (var i = 0; i < hashtags.length; i++) {
       if (hashtags[i].lastIndexOf('#') !== 0) {
