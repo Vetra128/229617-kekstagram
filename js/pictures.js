@@ -202,23 +202,7 @@ var addImageEffect = function (modifireClass, scaleEffect) {
 };
 
 var onScalePinMouseUp = function (evt) {
-  var scaleLineX = scaleLine.getBoundingClientRect().x;
-  scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
-  if (scaleValue.value <= 100) {
-    if (scaleValue.value <= 0) {
-      scalePin.style.left = '0%';
-      scaleLevel.style.width = '0%';
-    } else {
-      scalePin.style.left = scaleValue.value + '%';
-      scaleLevel.style.width = scaleValue.value + '%';
-    }
-  } else {
-    scalePin.style.left = '100%';
-    scaleLevel.style.width = '100%';
-  }
-  if (modifire) {
-    addImageEffect(modifire, scaleValue);
-  }
+  onScalePinMouseMove(evt);
   scale.removeEventListener('mouseup', onScalePinMouseUp);
   scale.removeEventListener('mousemove', onScalePinMouseMove);
   scale.removeEventListener('mouseleave', onScalePinMouseUp);
@@ -233,14 +217,11 @@ var onScalePinMouseDown = function () {
 var onScalePinMouseMove = function (evt) {
   var scaleLineX = scaleLine.getBoundingClientRect().x;
   scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
+  var scaleValuePercent;
   if (scaleValue.value <= 100) {
-    if (scaleValue.value <= 0) {
-      scalePin.style.left = '0%';
-      scaleLevel.style.width = '0%';
-    } else {
-      scalePin.style.left = scaleValue.value + '%';
-      scaleLevel.style.width = scaleValue.value + '%';
-    }
+    scaleValuePercent = (scaleValue.value <= 0) ? '0%' : (scaleValue.value + '%');
+    scalePin.style.left = scaleValuePercent;
+    scaleLevel.style.width = scaleValuePercent;
   } else {
     scalePin.style.left = '100%';
     scaleLevel.style.width = '100%';
