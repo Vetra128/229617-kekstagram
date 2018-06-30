@@ -229,7 +229,6 @@ var onScalePinMouseMove = function (evt) {
   if (modifire) {
     addImageEffect(modifire, scaleValue);
   }
-
 };
 
 var onEffectPrewClick = function (evt) {
