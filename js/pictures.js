@@ -36,7 +36,6 @@ var HASHTAG_LENGTH_MIN = 2;
 var HASHTAG_LENGTH_MAX = 20;
 var HASHTAGS_MAX_COUNT = 5;
 
-
 var uploadFile = document.querySelector('#upload-file');
 var uploadImageForm = document.querySelector('.img-upload__overlay');
 var uploadImageFormClose = document.querySelector('#upload-cancel');
@@ -165,13 +164,9 @@ var closeUploadImageForm = function () {
   effectPrewList.removeEventListener('click', onEffectPrewClick);
 };
 
-uploadFile.addEventListener('change', function () {
-  openUploadImageForm();
-});
+uploadFile.addEventListener('change', openUploadImageForm());
 
-uploadImageFormClose.addEventListener('click', function () {
-  closeUploadImageForm();
-});
+uploadImageFormClose.addEventListener('click', closeUploadImageForm());
 
 uploadImageFormClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
@@ -179,7 +174,7 @@ uploadImageFormClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var addImageEffect = function (modifireClass, scaleEffect) {
+var modifireImgPreview = function (modifireClass, scaleEffect) {
   switch (modifireClass.value) {
     case 'chrome':
       imgPreview.style.filter = 'grayscale(' + scaleEffect.value / PERCENTS_MAX + ')';
@@ -214,9 +209,7 @@ var onScalePinMouseDown = function () {
   scale.addEventListener('mouseleave', onScalePinMouseUp);
 };
 
-var onScalePinMouseMove = function (evt) {
-  var scaleLineX = scaleLine.getBoundingClientRect().x;
-  scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
+var calculateScaleValue = function () {
   var scaleValuePercent;
   if (scaleValue.value <= 100) {
     scaleValuePercent = (scaleValue.value <= 0) ? '0%' : (scaleValue.value + '%');
@@ -226,8 +219,14 @@ var onScalePinMouseMove = function (evt) {
     scalePin.style.left = '100%';
     scaleLevel.style.width = '100%';
   }
+};
+
+var onScalePinMouseMove = function (evt) {
+  var scaleLineX = scaleLine.getBoundingClientRect().x;
+  scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
+  calculateScaleValue();
   if (modifire) {
-    addImageEffect(modifire, scaleValue);
+    modifireImgPreview(modifire, scaleValue);
   }
 };
 
