@@ -49,7 +49,7 @@ var imgPreview = uploadImageForm.querySelector('.img-upload__preview');
 var picturesGalery = document.querySelector('.pictures');
 var detailedPhoto = document.querySelector('.big-picture');
 var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
-var modifire;
+var modifier;
 var hashtagsInput = document.querySelector('.text__hashtags');
 var commentsTextarea = document.querySelector('.text__description');
 
@@ -145,18 +145,18 @@ detailedPhoto.classList.add('hidden');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closeUploadImageForm();
+    onUploadImageFormClose();
   }
 };
 
-var openUploadImageForm = function () {
+var onUploadImageFormOpen = function () {
   uploadImageForm.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
   scale.addEventListener('mousedown', onScalePinMouseDown);
   effectPrewList.addEventListener('click', onEffectPrewClick);
 };
 
-var closeUploadImageForm = function () {
+var onUploadImageFormClose = function () {
   uploadImageForm.classList.add('hidden');
   uploadFile.value = '';
   document.removeEventListener('keydown', onPopupEscPress);
@@ -164,18 +164,18 @@ var closeUploadImageForm = function () {
   effectPrewList.removeEventListener('click', onEffectPrewClick);
 };
 
-uploadFile.addEventListener('change', openUploadImageForm());
+uploadFile.addEventListener('change', onUploadImageFormOpen);
 
-uploadImageFormClose.addEventListener('click', closeUploadImageForm());
+uploadImageFormClose.addEventListener('click', onUploadImageFormClose);
 
 uploadImageFormClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    closeUploadImageForm();
+    onUploadImageFormClose();
   }
 });
 
-var modifireImgPreview = function (modifireClass, scaleEffect) {
-  switch (modifireClass.value) {
+var changeImgPreviewStyle = function (modifierClass, scaleEffect) {
+  switch (modifierClass.value) {
     case 'chrome':
       imgPreview.style.filter = 'grayscale(' + scaleEffect.value / PERCENTS_MAX + ')';
       break;
@@ -225,21 +225,21 @@ var onScalePinMouseMove = function (evt) {
   var scaleLineX = scaleLine.getBoundingClientRect().x;
   scaleValue.value = Math.floor((evt.clientX - scaleLineX) * PERCENTS_MAX / SCALE_LINE_LENGTH);
   calculateScaleValue();
-  if (modifire) {
-    modifireImgPreview(modifire, scaleValue);
+  if (modifier) {
+    changeImgPreviewStyle(modifier, scaleValue);
   }
 };
 
 var onEffectPrewClick = function (evt) {
   if (evt.target.classList.contains('effects__radio')) {
     scaleValue.value = 0;
-    if (modifire) {
-      imgPreview.classList.remove('effects__preview--' + modifire.value);
+    if (modifier) {
+      imgPreview.classList.remove('effects__preview--' + modifier.value);
       imgPreview.style.filter = '';
     }
-    modifire = evt.target;
-    if (modifire.value !== 'none') {
-      imgPreview.classList.add('effects__preview--' + modifire.value);
+    modifier = evt.target;
+    if (modifier.value !== 'none') {
+      imgPreview.classList.add('effects__preview--' + modifier.value);
     }
   }
 };
