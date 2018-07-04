@@ -208,7 +208,6 @@
       sacleSizeValue = PERCENTS_MAX;
       imgPreview.style.transform = '';
     }
-    console.log(imgPreview.style.transform.scale);
     sacleSizeInput.value = sacleSizeValue+'%';
   };
 
@@ -219,7 +218,6 @@
       sacleSizeValue = RESIZE_STEP;
     }
     imgPreview.style.transform = 'scale(0.' + sacleSizeValue+')';
-    console.log(imgPreview.style.transform.scale);
     sacleSizeInput.value = sacleSizeValue+'%';
   };
 
