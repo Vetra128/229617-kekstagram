@@ -61,19 +61,19 @@
     return photography;
   };
 
-  var photos = createArrayOfPhotos();
-
-  var createPhotoList = function () {
+  var createPhotoList = function (data) {
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < PHOTOS_COUNT; i++) {
 
-      fragment.appendChild(createPhoto(photos[i]));
+      fragment.appendChild(createPhoto(data[i]));
     }
     similarPhotoList.appendChild(fragment);
+
   };
-  createPhotoList();
+
+  window.backend.load(createPhotoList, window.utils.onError);
 
   window.data = {
     photos: createArrayOfPhotos()

@@ -5,6 +5,7 @@
   var HASHTAGS_MAX_COUNT = 5;
   var hashtagsInput = document.querySelector('.text__hashtags');
   var commentsTextarea = document.querySelector('.text__description');
+  var uploadImageForm = document.querySelector('.img-upload__form');
 
   var onHashtagsValidity = function () {
     var trimmedInput = hashtagsInput.value.trim();
@@ -42,4 +43,14 @@
   hashtagsInput.addEventListener('change', onHashtagsValidity);
   hashtagsInput.addEventListener('keydown', onFieldEscPress);
   commentsTextarea.addEventListener('keydown', onFieldEscPress);
+
+  var onSuccessLoad = function () {
+    window.prewiew.onUploadImageFormClose();
+  };
+
+  uploadImageForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var data = new FormData(uploadImageForm);
+    window.backend.upload(data, onSuccessLoad, window.utils.onError);
+  });
 })();
