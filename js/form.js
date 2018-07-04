@@ -6,8 +6,6 @@
   var hashtagsInput = document.querySelector('.text__hashtags');
   var commentsTextarea = document.querySelector('.text__description');
   var uploadImageForm = document.querySelector('.img-upload__form');
-  var uploadImageFormSubmit = uploadImageForm.querySelector('.img-upload__submit');
-  var uploadImageFormOverlay = document.querySelector('.img-upload__overlay');
 
   var onHashtagsValidity = function () {
     var trimmedInput = hashtagsInput.value.trim();
@@ -47,7 +45,8 @@
   commentsTextarea.addEventListener('keydown', onFieldEscPress);
 
   var onSuccessLoad = function () {
-    uploadImageFormOverlay.classList.add('hidden');
+    window.prewiew.onUploadImageFormClose();
+    window.prewiew.onUploadImageFormClear();
   };
 
   var onErrorLoad = function (message) {
@@ -59,7 +58,6 @@
 
   uploadImageForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    uploadImageFormSubmit.disabled = true;
     var data = new FormData(uploadImageForm);
     window.backend.upload(data, onSuccessLoad, onErrorLoad);
   });
