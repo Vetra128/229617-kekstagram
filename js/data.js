@@ -75,7 +75,10 @@
 
 
   var onError = function (message) {
-    alert(message);
+    var uploadImageFormErrorBlock = document.querySelector('.img-upload__message--error');
+    uploadImageFormErrorBlock.textContent = message;
+    uploadImageFormErrorBlock.style.zIndex = 2;
+    uploadImageFormErrorBlock.classList.remove('hidden');
   };
 
   window.backend.load(createPhotoList, onError);
