@@ -49,16 +49,9 @@
     window.prewiew.onUploadImageFormClear();
   };
 
-  var onErrorLoad = function (message) {
-    var uploadImageFormErrorBlock = document.querySelector('.img-upload__message--error');
-    uploadImageFormErrorBlock.textContent = message;
-    uploadImageFormErrorBlock.style.zIndex = 2;
-    uploadImageFormErrorBlock.classList.remove('hidden');
-  };
-
   uploadImageForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     var data = new FormData(uploadImageForm);
-    window.backend.upload(data, onSuccessLoad, onErrorLoad);
+    window.backend.upload(data, onSuccessLoad, window.utils.onError);
   });
 })();

@@ -73,15 +73,7 @@
 
   };
 
-
-  var onError = function (message) {
-    var uploadImageFormErrorBlock = document.querySelector('.img-upload__message--error');
-    uploadImageFormErrorBlock.textContent = message;
-    uploadImageFormErrorBlock.style.zIndex = 2;
-    uploadImageFormErrorBlock.classList.remove('hidden');
-  };
-
-  window.backend.load(createPhotoList, onError);
+  window.backend.load(createPhotoList, window.utils.onError);
 
   window.data = {
     photos: createArrayOfPhotos()
