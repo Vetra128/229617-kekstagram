@@ -46,7 +46,6 @@
 
   var onSuccessLoad = function () {
     window.prewiew.onUploadImageFormClose();
-    window.prewiew.onUploadImageFormClear();
   };
 
   uploadImageForm.addEventListener('submit', function (evt) {
