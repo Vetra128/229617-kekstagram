@@ -26,17 +26,17 @@
     };
   };
 
-  var showImgFilters = function (popularPhotoList, newPhotoList, discussedPhotoList) {
+  var showImgFilters = function () {
     imgFilters.classList.remove('img-filters--inactive');
 
     popularFilterBtn.addEventListener('click', function () {
-      onPopularFilterBtnClick(popularPhotoList);
+      onPopularFilterBtnClick(window.data.photos);
     });
     newFilterBtn.addEventListener('click', function () {
-      onNewFilterBtnClick(newPhotoList);
+      onNewFilterBtnClick(window.data.shuffledPhotos);
     });
     discussedFilterBtn.addEventListener('click', function () {
-      onDiscussedFilterBtn(discussedPhotoList);
+      onDiscussedFilterBtn(window.data.discussedPhotos);
     });
   };
 

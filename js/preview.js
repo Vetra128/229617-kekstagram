@@ -60,9 +60,6 @@
     detailedPhotoLoadmore.classList.add('visually-hidden');
   };
 
-  showDetailedPhoto(detailedPhoto, window.data.photos[0]);
-  detailedPhoto.classList.add('hidden');
-
   var onPopupEscPress = function (evt) {
     window.utils.isEscEvent(evt, onUploadImageFormClose());
   };
