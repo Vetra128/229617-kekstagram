@@ -69,25 +69,20 @@
       fragment.appendChild(createPhoto(data[i]));
     }
 
-    var popularPhoto = data.map(function (item, index) {
-      item.index = index;
-      return item;
-    });
-
-    var shuffledPhotos = popularPhoto.map(function (item) {
+    var shuffledPhotos = data.map(function (item) {
       return item;
     }).sort(function () {
       return (Math.random() - 0.5);
     });
 
-    var discussedPhotos = popularPhoto.map(function (item) {
+    var discussedPhotos = data.map(function (item) {
       return item;
     }).sort(function (a, b) {
       return b.likes - a.likes;
     });
 
     similarPhotoList.appendChild(fragment);
-    window.filters.showImgFilters(popularPhoto, shuffledPhotos, discussedPhotos);
+    window.filters.showImgFilters(data, shuffledPhotos, discussedPhotos);
   };
 
   window.backend.load(createPhotoList, window.utils.onError);
