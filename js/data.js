@@ -69,7 +69,6 @@
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < PHOTOS_COUNT; i++) {
-
       fragment.appendChild(createPhoto(data[i]));
     }
 
@@ -95,8 +94,6 @@
   };
 
   window.backend.load(createPhotoList, window.utils.onError);
-
-  console.log(popularPhoto, shuffledPhotos, discussedPhotos);
 
   window.data = {
     photos: createArrayOfPhotos(),
