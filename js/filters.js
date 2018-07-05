@@ -40,7 +40,7 @@
     });
   };
 
-  var onPopularFilterBtnClick = debounce(function (popularPhotos) {
+  var onPopularFilterBtnClick = debounce (function (popularPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
@@ -56,7 +56,7 @@
     similarPhotoList.appendChild(fragment);
   });
 
-  var onNewFilterBtnClick = debounce(function (newPhotos) {
+  var onNewFilterBtnClick = debounce (function (newPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
@@ -72,7 +72,7 @@
     similarPhotoList.appendChild(fragment);
   });
 
-  var onDiscussedFilterBtn = debounce(function (discussedPhotos) {
+  var onDiscussedFilterBtn = debounce (function (discussedPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
