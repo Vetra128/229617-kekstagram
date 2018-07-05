@@ -30,13 +30,19 @@
     imgFilters.classList.remove('img-filters--inactive');
 
     popularFilterBtn.addEventListener('click', function () {
-      debounce(onPopularFilterBtnClick(popularPhotoList));
+      debounce(function () {
+        onPopularFilterBtnClick(popularPhotoList);
+      });
     });
     newFilterBtn.addEventListener('click', function () {
-      debounce(onNewFilterBtnClick(newPhotoList));
+      debounce(function () {
+        onNewFilterBtnClick(newPhotoList);
+      });
     });
     discussedFilterBtn.addEventListener('click', function () {
-      debounce(onDiscussedFilterBtn(discussedPhotoList));
+      debounce(function () {
+        onDiscussedFilterBtn(discussedPhotoList);
+      });
     });
   };
 
