@@ -66,16 +66,30 @@
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < PHOTOS_COUNT; i++) {
-
       fragment.appendChild(createPhoto(data[i]));
     }
-    similarPhotoList.appendChild(fragment);
 
+    var shuffledPhotos = data.map(function (item) {
+      return item;
+    }).sort(function () {
+      return (Math.random() - 0.5);
+    });
+
+    var discussedPhotos = data.map(function (item) {
+      return item;
+    }).sort(function (a, b) {
+      return b.likes - a.likes;
+    });
+
+    similarPhotoList.appendChild(fragment);
+    window.filters.showImgFilters(data, shuffledPhotos, discussedPhotos);
   };
 
   window.backend.load(createPhotoList, window.utils.onError);
 
   window.data = {
-    photos: createArrayOfPhotos()
+    photos: createArrayOfPhotos(),
+    PHOTOS_COUNT: PHOTOS_COUNT,
+    createPhoto: createPhoto
   };
 })();
