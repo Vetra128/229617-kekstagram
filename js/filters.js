@@ -6,9 +6,6 @@
   var popularFilterBtn = imgFilters.querySelector('#filter-popular');
   var newFilterBtn = imgFilters.querySelector('#filter-new');
   var discussedFilterBtn = imgFilters.querySelector('#filter-discussed');
-  var shuffledPhotos = window.data.shuffledPhotos;
-  var popularPhoto = window.data.popularPhoto;
-  var discussedPhotos = window.data.discussedPhotos;
 
   var clearPicturesGalery = function () {
     document.querySelectorAll('.picture__link').forEach(function (item) {
@@ -16,27 +13,27 @@
     });
   };
 
-  var showImgFilters = function () {
+  var showImgFilters = function (popularPhotoList, newPhotoList, discussedPhotoList) {
     imgFilters.classList.remove('img-filters--inactive');
 
     popularFilterBtn.addEventListener('click', function () {
       setTimeout(function () {
-        onPopularFilterBtnClick();
+        onPopularFilterBtnClick(popularPhotoList);
       }, DEBOUNCE_TIME);
     });
     newFilterBtn.addEventListener('click', function () {
       setTimeout(function () {
-        onNewFilterBtnClick();
+        onNewFilterBtnClick(newPhotoList);
       }, DEBOUNCE_TIME);
     });
     discussedFilterBtn.addEventListener('click', function () {
       setTimeout(function () {
-        onDiscussedFilterBtn();
+        onDiscussedFilterBtn(discussedPhotoList);
       }, DEBOUNCE_TIME);
     });
   };
 
-  var onPopularFilterBtnClick = function () {
+  var onPopularFilterBtnClick = function (popularPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
@@ -47,12 +44,12 @@
 
     for (var i = 0; i < window.data.PHOTOS_COUNT; i++) {
 
-      fragment.appendChild(window.data.createPhoto(popularPhoto[i]));
+      fragment.appendChild(window.data.createPhoto(popularPhotos[i]));
     }
     similarPhotoList.appendChild(fragment);
   };
 
-  var onNewFilterBtnClick = function () {
+  var onNewFilterBtnClick = function (newPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();
@@ -63,12 +60,12 @@
 
     for (var i = 0; i < NEW_PHOTOS_COUNT; i++) {
 
-      fragment.appendChild(window.data.createPhoto(shuffledPhotos[i]));
+      fragment.appendChild(window.data.createPhoto(newPhotos[i]));
     }
     similarPhotoList.appendChild(fragment);
   };
 
-  var onDiscussedFilterBtn = function () {
+  var onDiscussedFilterBtn = function (discussedPhotos) {
     clearPicturesGalery();
     var similarPhotoList = document.querySelector('.pictures');
     var fragment = document.createDocumentFragment();

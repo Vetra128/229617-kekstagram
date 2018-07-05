@@ -23,9 +23,6 @@
   ];
   var INDEX_COMMENT_MAX = COMMENTS.length - 1;
   var INDEX_DESCRIPTION_MAX = DESCRIPTIONS.length - 1;
-  var popularPhoto = [];
-  var shuffledPhotos = [];
-  var discussedPhotos = [];
 
   var fillPhotoComments = function (photo) {
     if (window.utils.getRandomInteger(COMMENTS_MIN_COUNT, COMMENTS_MAX_COUNT) === COMMENTS_MAX_COUNT) {
@@ -72,25 +69,25 @@
       fragment.appendChild(createPhoto(data[i]));
     }
 
-    popularPhoto = data.map(function (item, index) {
+    var popularPhoto = data.map(function (item, index) {
       item.index = index;
       return item;
     });
 
-    shuffledPhotos = popularPhoto.map(function (item) {
+    var shuffledPhotos = popularPhoto.map(function (item) {
       return item;
     }).sort(function () {
       return (Math.random() - 0.5);
     });
 
-    discussedPhotos = popularPhoto.map(function (item) {
+    var discussedPhotos = popularPhoto.map(function (item) {
       return item;
     }).sort(function (a, b) {
       return b.likes - a.likes;
     });
 
     similarPhotoList.appendChild(fragment);
-    window.filters.showImgFilters();
+    window.filters.showImgFilters(popularPhoto, shuffledPhotos, discussedPhotos);
   };
 
   window.backend.load(createPhotoList, window.utils.onError);
@@ -98,9 +95,6 @@
   window.data = {
     photos: createArrayOfPhotos(),
     PHOTOS_COUNT: PHOTOS_COUNT,
-    popularPhoto: popularPhoto,
-    shuffledPhotos: shuffledPhotos,
-    discussedPhotos: discussedPhotos,
     createPhoto: createPhoto
   };
 })();
