@@ -13,23 +13,30 @@
     });
   };
 
+  var debounce = function (fun) {
+    var lastTimeout = null;
+    return function() {
+      var args = arguments;
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function() {
+        fun.apply(null, args);
+      }, DEBOUNCE_TIME);
+    };
+  };
+
   var showImgFilters = function (popularPhotoList, newPhotoList, discussedPhotoList) {
     imgFilters.classList.remove('img-filters--inactive');
 
     popularFilterBtn.addEventListener('click', function () {
-      setTimeout(function () {
-        onPopularFilterBtnClick(popularPhotoList);
-      }, DEBOUNCE_TIME);
+      debounce(onPopularFilterBtnClick(popularPhotoList));
     });
     newFilterBtn.addEventListener('click', function () {
-      setTimeout(function () {
-        onNewFilterBtnClick(newPhotoList);
-      }, DEBOUNCE_TIME);
+      debounce(onNewFilterBtnClick(newPhotoList));
     });
     discussedFilterBtn.addEventListener('click', function () {
-      setTimeout(function () {
-        onDiscussedFilterBtn(discussedPhotoList);
-      }, DEBOUNCE_TIME);
+      debounce(onDiscussedFilterBtn(discussedPhotoList));
     });
   };
 
