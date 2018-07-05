@@ -29,21 +29,21 @@
   var showImgFilters = function (popularPhotoList, newPhotoList, discussedPhotoList) {
     imgFilters.classList.remove('img-filters--inactive');
 
-    popularFilterBtn.addEventListener('click', function () {
+    popularFilterBtn.addEventListener('click',
       debounce(function () {
         onPopularFilterBtnClick(popularPhotoList);
-      });
-    });
-    newFilterBtn.addEventListener('click', function () {
+      })
+    );
+    newFilterBtn.addEventListener('click',
       debounce(function () {
         onNewFilterBtnClick(newPhotoList);
-      });
-    });
-    discussedFilterBtn.addEventListener('click', function () {
+      })
+    );
+    discussedFilterBtn.addEventListener('click',
       debounce(function () {
         onDiscussedFilterBtn(discussedPhotoList);
-      });
-    });
+      })
+    );
   };
 
   var onPopularFilterBtnClick = function (popularPhotos) {
