@@ -7,7 +7,6 @@
   var discussedFilterBtn = imgFilters.querySelector('#filter-discussed');
   var prevActiveBtn = imgFilters.querySelector('.img-filters__button--active');
   var similarPhotoList = document.querySelector('.pictures');
-  var fragment = document.createDocumentFragment();
 
   var clearPicturesGalery = function () {
     document.querySelectorAll('.picture__link').forEach(function (item) {
@@ -23,6 +22,7 @@
   };
 
   var applyFilter = function (newActiveBtn) {
+    var fragment = document.createDocumentFragment();
     clearPicturesGalery();
     prevActiveBtn.classList.remove('img-filters__button--active');
     newActiveBtn.classList.add('img-filters__button--active');
