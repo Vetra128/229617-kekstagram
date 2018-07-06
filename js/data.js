@@ -2,7 +2,6 @@
 (function () {
   var PHOTOS_COUNT = 25;
   var similarPhotoList = document.querySelector('.pictures');
-  var fragment = document.createDocumentFragment();
 
   var createPhoto = function (photo) {
     var similarPhotoTemplate = document.querySelector('#picture').content;
@@ -16,6 +15,7 @@
   };
 
   var createPhotoList = function (data) {
+    var fragment = document.createDocumentFragment();
     for (var i = 0; i < PHOTOS_COUNT; i++) {
       fragment.appendChild(createPhoto(data[i]));
     }

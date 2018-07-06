@@ -32,7 +32,6 @@
   var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
   var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
   var detailedPhotoPicture = detailedPhoto.querySelector('.social__picture');
-  var detailedPhotoText = detailedPhoto.querySelector('.social__text');
   var detailedPhotoCounterOfComment = detailedPhoto.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
   var modifier;
@@ -46,14 +45,18 @@
     detailedPhotoImg.src = photo.url;
     detailedPhotoLikes.textContent = photo.likes;
     detailedPhotoComments.textContent = photo.comments.length;
-    var detailedPhotoComment = detailedPhoto.querySelector('.social__comment').cloneNode(true);
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < photo.comments.length; i++) {
+      var detailedPhotoComment = detailedPhoto.querySelector('.social__comment').cloneNode(true);
       detailedPhotoPicture.src = 'img/avatar-' + (window.utils.getRandomInteger(INDEX_AVATAR_MIN, INDEX_AVATAR_MAX)) + '.svg';
-      detailedPhotoText.textContent = photo.comments[i];
-      console.log( photo.comments[i]);
+      detailedPhotoComment.querySelector('.social__picture').src = detailedPhotoPicture.src;
+      detailedPhotoComment.querySelector('.social__text').textContent = photo.comments[i];
       fragment.appendChild(detailedPhotoComment);
+    }
+
+    while (detailedPhotoCommentList.lastChild) {
+      detailedPhotoCommentList.removeChild(detailedPhotoCommentList.lastChild);
     }
 
     detailedPhotoCommentList.appendChild(fragment);
