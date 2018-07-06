@@ -31,7 +31,6 @@
   var detailedPhotoComments = detailedPhoto.querySelector('.comments-count');
   var detailedPhotoCloseBtn = detailedPhoto.querySelector('.big-picture__cancel');
   var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
-  var detailedPhotoPicture = detailedPhoto.querySelector('.social__picture');
   var detailedPhotoCounterOfComment = detailedPhoto.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
   var modifier;
@@ -49,8 +48,7 @@
 
     for (var i = 0; i < photo.comments.length; i++) {
       var detailedPhotoComment = detailedPhoto.querySelector('.social__comment').cloneNode(true);
-      detailedPhotoPicture.src = 'img/avatar-' + (window.utils.getRandomInteger(INDEX_AVATAR_MIN, INDEX_AVATAR_MAX)) + '.svg';
-      detailedPhotoComment.querySelector('.social__picture').src = detailedPhotoPicture.src;
+      detailedPhotoComment.querySelector('.social__picture').src = 'img/avatar-' + (window.utils.getRandomInteger(INDEX_AVATAR_MIN, INDEX_AVATAR_MAX)) + '.svg';
       detailedPhotoComment.querySelector('.social__text').textContent = photo.comments[i];
       fragment.appendChild(detailedPhotoComment);
     }
