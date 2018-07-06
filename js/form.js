@@ -39,7 +39,9 @@
   };
 
   var onFieldEscPress = function (evt) {
-    window.utils.isEscEvent(evt, function(){evt.stopPropagation()});
+    window.utils.isEscEvent(evt, function () {
+      evt.stopPropagation();
+    });
   };
 
   var onSuccessLoad = function () {

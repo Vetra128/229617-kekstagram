@@ -82,7 +82,9 @@
   };
 
   var onUploadImageFormFieldPress = function (evt) {
-    window.utils.isEscEvent(evt, function(){evt.stopPropagation()});
+    window.utils.isEscEvent(evt, function () {
+      evt.stopPropagation();
+    });
   };
 
   var onUploadImageFormClear = function () {
@@ -223,7 +225,6 @@
     if (evt.target.classList.contains('picture__img')) {
       var fullPath = evt.target.src;
       var filename = fullPath.split('/').pop().split('.')[0];
-      console.log();
       showDetailedPhoto(window.data.photos[filename - 1]);
       openDetaliedPhoto();
     }
