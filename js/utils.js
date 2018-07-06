@@ -1,18 +1,20 @@
 'use strict';
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
+  var Keycode = {
+    ESC: 27,
+    ENTER: 13
+  };
   var DEBOUNCE_TIME = 500;
 
   window.utils = {
-    isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        action();
+    isEscEvent: function (evt, callback) {
+      if (evt.keyCode === Keycode.ESC) {
+        callback();
       }
     },
-    isEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        action();
+    isEnterEvent: function (evt, callback) {
+      if (evt.keyCode === Keycode.ENTER) {
+        callback();
       }
     },
     getRandomInteger: function (min, max) {
