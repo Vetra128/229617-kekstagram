@@ -37,6 +37,7 @@
   var scaleSizeValue = parseInt(scaleSizeInput.value, 10);
   var uploadImageFormHashtagsInput = uploadImageForm.querySelector('.text__hashtags');
   var uploadImageFormCommentTextarea = uploadImageForm.querySelector('.text__description');
+  var body = document.querySelector('body');
 
   var showDetailedPhoto = function (photo) {
     detailedPhoto.classList.remove('hidden');
@@ -81,7 +82,7 @@
   };
 
   var onUploadImageFormFieldPress = function (evt) {
-    window.utils.isEscEvent(evt, evt.stopPropagation());
+    window.utils.isEscEvent(evt, function(){evt.stopPropagation()});
   };
 
   var onUploadImageFormClear = function () {
@@ -117,6 +118,7 @@
   var closeDetaliedPhoto = function () {
     detailedPhoto.classList.add('hidden');
     document.removeEventListener('keydown', onDetaliedPhotoEscPress);
+    body.classList.remove('modal-open');
   };
 
   var openDetaliedPhoto = function () {
@@ -124,6 +126,7 @@
     document.addEventListener('keydown', onDetaliedPhotoEscPress);
     detailedPhotoCloseBtn.addEventListener('click', closeDetaliedPhoto);
     detailedPhotoCloseBtn.addEventListener('keydown', onDetaliedPhotoClosePress);
+    body.classList.add('modal-open');
   };
 
   var changeImgPreviewStyle = function (modifierClass, scaleEffect) {
