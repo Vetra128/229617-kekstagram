@@ -1,8 +1,10 @@
 'use strict';
 (function () {
-  var HASHTAG_LENGTH_MIN = 2;
-  var HASHTAG_LENGTH_MAX = 20;
-  var HASHTAGS_MAX_COUNT = 5;
+  var Hashtag = {
+    MIN_LENGTH: 2,
+    MAX_LENGTH: 20,
+    MAX_COUNT: 5
+  };
   var hashtagsInput = document.querySelector('.text__hashtags');
   var commentsTextarea = document.querySelector('.text__description');
   var uploadImageForm = document.querySelector('.img-upload__form');
@@ -15,7 +17,7 @@
     var hashtags = trimmedInput.toLowerCase().split(' ');
     var hashtagsObj = {};
     hashtagsInput.setCustomValidity('');
-    if (hashtags.length > HASHTAGS_MAX_COUNT) {
+    if (hashtags.length > Hashtag.MAX_COUNT) {
       hashtagsInput.setCustomValidity('максимальное количество хэштегов - 5');
       return;
     }
@@ -24,7 +26,7 @@
         hashtagsInput.setCustomValidity('Хэштег должен начинаться с символа # и больше не иметь этого символа');
         return;
       }
-      if ((hashtags[i].length < HASHTAG_LENGTH_MIN) || (hashtags[i].length > HASHTAG_LENGTH_MAX)) {
+      if ((hashtags[i].length < Hashtag.MIN_LENGTH) || (hashtags[i].length > Hashtag.MAX_LENGTH)) {
         hashtagsInput.setCustomValidity('Длина хэштега должна быть больше 2, но меньше 20 символов');
         return;
       }
@@ -40,17 +42,18 @@
     window.utils.isEscEvent(evt, evt.stopPropagation());
   };
 
-  hashtagsInput.addEventListener('change', onHashtagsValidity);
-  hashtagsInput.addEventListener('keydown', onFieldEscPress);
-  commentsTextarea.addEventListener('keydown', onFieldEscPress);
-
   var onSuccessLoad = function () {
     window.prewiew.onUploadImageFormClose();
   };
 
-  uploadImageForm.addEventListener('submit', function (evt) {
+  var onUploadImageFormSubmit = function (evt) {
     evt.preventDefault();
     var data = new FormData(uploadImageForm);
     window.backend.upload(data, onSuccessLoad, window.utils.onError);
-  });
+  };
+
+  hashtagsInput.addEventListener('change', onHashtagsValidity);
+  hashtagsInput.addEventListener('keydown', onFieldEscPress);
+  commentsTextarea.addEventListener('keydown', onFieldEscPress);
+  uploadImageForm.addEventListener('submit', onUploadImageFormSubmit);
 })();
