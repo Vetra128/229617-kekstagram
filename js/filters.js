@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   var NEW_PHOTOS_COUNT = 10;
-  var DEBOUNCE_TIME = 500;
   var imgFilters = document.querySelector('.img-filters');
   var popularFilterBtn = imgFilters.querySelector('#filter-popular');
   var newFilterBtn = imgFilters.querySelector('#filter-new');
@@ -16,18 +15,9 @@
     });
   };
 
-  var debounce = function (func) {
-    var lastTimeout;
-    if (lastTimeout) {
-      clearTimeout(lastTimeout);
-    }
-    lastTimeout = setTimeout(func, DEBOUNCE_TIME);
-    return lastTimeout;
-  };
-
   var onFilterBtnClick = function (evt) {
     var btn = evt.currentTarget;
-    debounce(function () {
+    window.utils.debounce(function () {
       applyFilter(btn);
     });
   };

@@ -2,6 +2,7 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var DEBOUNCE_TIME = 500;
 
   window.utils = {
     isEscEvent: function (evt, action) {
@@ -22,6 +23,14 @@
       errorBlock.textContent = message;
       errorBlock.style.zIndex = 5;
       errorBlock.classList.remove('hidden');
+    },
+    debounce: function (func) {
+      var lastTimeout;
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
+      }
+      lastTimeout = setTimeout(func, DEBOUNCE_TIME);
+      return lastTimeout;
     }
   };
 })();
