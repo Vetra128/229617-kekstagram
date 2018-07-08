@@ -32,7 +32,6 @@
   var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
   var detailedPhotoCounterOfComment = detailedPhoto.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
-  var body = document.body;
   var photoGalery = document.querySelector('.pictures');
   var scaleSizeValue = PERCENTS_MAX;
   var modifier;
@@ -120,7 +119,7 @@
   var closeDetaliedPhoto = function () {
     detailedPhoto.classList.add('hidden');
     document.removeEventListener('keydown', onDetaliedPhotoEscPress);
-    body.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
   };
 
   var openDetaliedPhoto = function () {
@@ -128,7 +127,7 @@
     document.addEventListener('keydown', onDetaliedPhotoEscPress);
     detailedPhotoCloseBtn.addEventListener('click', closeDetaliedPhoto);
     detailedPhotoCloseBtn.addEventListener('keydown', onDetaliedPhotoClosePress);
-    body.classList.add('modal-open');
+    document.body.classList.add('modal-open');
   };
 
   var changeImgPreviewStyle = function (modifierClass, scaleEffect) {
