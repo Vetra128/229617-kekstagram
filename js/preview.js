@@ -32,7 +32,7 @@
   var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
   var detailedPhotoCounterOfComment = detailedPhoto.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
-  var body = document.querySelector('body');
+  var body = document.body;
   var photoGalery = document.querySelector('.pictures');
   var scaleSizeValue = PERCENTS_MAX;
   var modifier;
