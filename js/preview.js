@@ -24,7 +24,6 @@
   var resizeBtnPlus = uploadImageForm.querySelector('.resize__control--plus');
   var scaleSizeInput = uploadImageForm.querySelector('.resize__control--value');
   var imgPreview = uploadImageForm.querySelector('.img-upload__preview');
-  var picturesGalery = document.querySelector('.pictures');
   var detailedPhoto = document.querySelector('.big-picture');
   var detailedPhotoImg = detailedPhoto.querySelector('.big-picture__img > img');
   var detailedPhotoLikes = detailedPhoto.querySelector('.likes-count');
@@ -247,9 +246,10 @@
 
   uploadImageFormClose.addEventListener('keydown', onUploadImageFormCloseBtnEnter);
 
-  picturesGalery.addEventListener('click', onPicturesGaleryClick);
+  window.data.photoGalery.addEventListener('click', onPicturesGaleryClick);
 
-  window.prewiew = {
-    onUploadImageFormClose: onUploadImageFormClose
+  window.preview = {
+    onUploadImageFormClose: onUploadImageFormClose,
+    uploadImageForm: uploadImageForm
   };
 })();

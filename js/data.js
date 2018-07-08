@@ -33,6 +33,7 @@
 
     window.data = {
       photos: data,
+      photoGalery: similarPhotoList,
       shuffledPhotos: shuffledPhotos,
       discussedPhotos: discussedPhotos,
       PHOTOS_COUNT: PHOTOS_COUNT,

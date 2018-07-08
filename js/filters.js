@@ -6,7 +6,6 @@
   var newFilterBtn = imgFilters.querySelector('#filter-new');
   var discussedFilterBtn = imgFilters.querySelector('#filter-discussed');
   var prevActiveBtn = imgFilters.querySelector('.img-filters__button--active');
-  var similarPhotoList = document.querySelector('.pictures');
 
   var clearPicturesGalery = function () {
     document.querySelectorAll('.picture__link').forEach(function (item) {
@@ -41,7 +40,7 @@
     for (var i = 0; i < count; i++) {
       fragment.appendChild(window.data.createPhoto(photos[i]));
     }
-    similarPhotoList.appendChild(fragment);
+    window.data.photoGalery.appendChild(fragment);
   };
 
 
