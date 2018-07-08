@@ -5,7 +5,6 @@
     ENTER: 13
   };
   var DEBOUNCE_TIME = 500;
-  var ERROR_ZINDEX = 5;
 
   window.utils = {
     isEscEvent: function (evt, callback) {
@@ -24,7 +23,7 @@
     onError: function (message) {
       var errorBlock = document.querySelector('.img-upload__message--error');
       errorBlock.textContent = message;
-      errorBlock.style.zIndex = ERROR_ZINDEX;
+      errorBlock.style.zIndex = 5;
       errorBlock.classList.remove('hidden');
     },
     debounce: function (func) {

@@ -32,10 +32,10 @@
   var detailedPhotoCommentList = detailedPhoto.querySelector('.social__comments');
   var detailedPhotoCounterOfComment = detailedPhoto.querySelector('.social__comment-count');
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
-  var modifier;
-  var scaleSizeValue = PERCENTS_MAX;
   var body = document.querySelector('body');
   var photoGalery = document.querySelector('.pictures');
+  var scaleSizeValue = PERCENTS_MAX;
+  var modifier;
 
   var showDetailedPhoto = function (photo) {
     detailedPhoto.classList.remove('hidden');

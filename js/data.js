@@ -1,6 +1,7 @@
 'use strict';
 (function () {
-  var PHOTOS_COUNT = 25;
+  var PHOTOS_COUNT = 10;
+  var PROBABILITY = 0.5;
 
   var createPhoto = function (photo) {
     var similarPhotoTemplate = document.querySelector('#picture').content;
@@ -15,13 +16,13 @@
 
   var createPhotoList = function (data) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < PHOTOS_COUNT; i++) {
-      fragment.appendChild(createPhoto(data[i]));
-    }
+    data.forEach(function (el) {
+      fragment.appendChild(createPhoto(el));
+    });
 
     var shuffledPhotos = data.slice().sort(function () {
-      return (Math.random() - 0.5);
-    });
+      return (Math.random() - PROBABILITY);
+    }).slice(0, PHOTOS_COUNT);
 
     var discussedPhotos = data.slice().sort(function (a, b) {
       return b.likes - a.likes;
@@ -34,7 +35,6 @@
       photos: data,
       shuffledPhotos: shuffledPhotos,
       discussedPhotos: discussedPhotos,
-      PHOTOS_COUNT: PHOTOS_COUNT,
       createPhoto: createPhoto
     };
   };
