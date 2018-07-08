@@ -38,7 +38,6 @@
     window.preview.photoGalery.appendChild(fragment);
   };
 
-
   var showImgFilters = function () {
     imgFilters.classList.remove('img-filters--inactive');
     popularFilterBtn.addEventListener('click', onFilterBtnClick);
