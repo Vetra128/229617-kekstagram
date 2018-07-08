@@ -80,7 +80,6 @@
     scaleLevel.style.width = DEFAULT_SCALE_PIN + '%';
     scaleSizeInput.value = DEFAULT_SIZE;
     scaleSizeInput.setAttribute('value', PERCENTS_MAX + '%');
-    console.log(scaleSizeInput);
   };
 
   var onUploadImageFormFieldPress = function (evt) {
@@ -201,6 +200,8 @@
       if (modifier.value !== 'none') {
         imgPreview.classList.add('effects__preview--' + modifier.value);
         scale.classList.remove('hidden');
+        scalePin.style.left = '100%';
+        scaleLevel.style.width = '100%';
       } else {
         scale.classList.add('hidden');
       }
