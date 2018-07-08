@@ -34,9 +34,8 @@
   var detailedPhotoLoadmore = detailedPhoto.querySelector('.social__loadmore');
   var modifier;
   var scaleSizeValue = PERCENTS_MAX;
-  var uploadImageFormHashtagsInput = uploadImageForm.querySelector('.text__hashtags');
-  var uploadImageFormCommentTextarea = uploadImageForm.querySelector('.text__description');
   var body = document.querySelector('body');
+  var photoGalery = document.querySelector('.pictures');
 
   var showDetailedPhoto = function (photo) {
     detailedPhoto.classList.remove('hidden');
@@ -46,12 +45,12 @@
     detailedPhotoComments.textContent = photo.comments.length;
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < photo.comments.length; i++) {
+    photo.comments.forEach(function (comment) {
       var detailedPhotoComment = detailedPhoto.querySelector('.social__comment').cloneNode(true);
       detailedPhotoComment.querySelector('.social__picture').src = 'img/avatar-' + (window.utils.getRandomInteger(INDEX_AVATAR_MIN, INDEX_AVATAR_MAX)) + '.svg';
-      detailedPhotoComment.querySelector('.social__text').textContent = photo.comments[i];
+      detailedPhotoComment.querySelector('.social__text').textContent = comment;
       fragment.appendChild(detailedPhotoComment);
-    }
+    });
 
     while (detailedPhotoCommentList.lastChild) {
       detailedPhotoCommentList.removeChild(detailedPhotoCommentList.lastChild);
@@ -73,8 +72,8 @@
     resizeBtnMinus.addEventListener('click', onScaleSizeDecrease);
     resizeBtnPlus.addEventListener('click', onScaleSizeIncrease);
     effectPrewList.addEventListener('click', onEffectPrewClick);
-    uploadImageFormHashtagsInput.addEventListener('keydown', onUploadImageFormFieldPress);
-    uploadImageFormCommentTextarea.addEventListener('keydown', onUploadImageFormFieldPress);
+    window.form.hashtagsInput.addEventListener('keydown', onUploadImageFormFieldPress);
+    window.form.commentsTextarea.addEventListener('keydown', onUploadImageFormFieldPress);
     scalePin.style.left = DEFAULT_SCALE_PIN + '%';
     scaleLevel.style.width = DEFAULT_SCALE_PIN + '%';
     scaleSizeInput.value = DEFAULT_SIZE;
@@ -105,8 +104,8 @@
     resizeBtnMinus.removeEventListener('click', onScaleSizeDecrease);
     resizeBtnPlus.removeEventListener('click', onScaleSizeIncrease);
     effectPrewList.removeEventListener('click', onEffectPrewClick);
-    uploadImageFormHashtagsInput.removeEventListener('keydown', onUploadImageFormFieldPress);
-    uploadImageFormCommentTextarea.removeEventListener('keydown', onUploadImageFormFieldPress);
+    window.form.hashtagsInput.removeEventListener('keydown', onUploadImageFormFieldPress);
+    window.form.commentsTextarea.removeEventListener('keydown', onUploadImageFormFieldPress);
     onUploadImageFormClear();
   };
 
@@ -246,10 +245,11 @@
 
   uploadImageFormClose.addEventListener('keydown', onUploadImageFormCloseBtnEnter);
 
-  window.data.photoGalery.addEventListener('click', onPicturesGaleryClick);
+  photoGalery.addEventListener('click', onPicturesGaleryClick);
 
   window.preview = {
     onUploadImageFormClose: onUploadImageFormClose,
-    uploadImageForm: uploadImageForm
+    uploadImageForm: uploadImageForm,
+    photoGalery: photoGalery
   };
 })();

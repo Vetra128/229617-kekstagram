@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   var PHOTOS_COUNT = 25;
-  var similarPhotoList = document.querySelector('.pictures');
 
   var createPhoto = function (photo) {
     var similarPhotoTemplate = document.querySelector('#picture').content;
@@ -28,12 +27,11 @@
       return b.likes - a.likes;
     });
 
-    similarPhotoList.appendChild(fragment);
+    window.preview.photoGalery.appendChild(fragment);
     window.filters.showImgFilters();
 
     window.data = {
       photos: data,
-      photoGalery: similarPhotoList,
       shuffledPhotos: shuffledPhotos,
       discussedPhotos: discussedPhotos,
       PHOTOS_COUNT: PHOTOS_COUNT,

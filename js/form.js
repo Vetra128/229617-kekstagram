@@ -20,21 +20,22 @@
       hashtagsInput.setCustomValidity('максимальное количество хэштегов - 5');
       return;
     }
-    for (var i = 0; i < hashtags.length; i++) {
-      if (hashtags[i].lastIndexOf('#') !== 0) {
+
+    hashtags.forEach(function (hashtag) {
+      if (hashtag.lastIndexOf('#') !== 0) {
         hashtagsInput.setCustomValidity('Хэштег должен начинаться с символа # и больше не иметь этого символа');
         return;
       }
-      if ((hashtags[i].length < Hashtag.MIN_LENGTH) || (hashtags[i].length > Hashtag.MAX_LENGTH)) {
+      if ((hashtag.length < Hashtag.MIN_LENGTH) || (hashtag.length > Hashtag.MAX_LENGTH)) {
         hashtagsInput.setCustomValidity('Длина хэштега должна быть больше 2, но меньше 20 символов');
         return;
       }
-      if (hashtagsObj.hasOwnProperty(hashtags[i])) {
+      if (hashtagsObj.hasOwnProperty(hashtag)) {
         hashtagsInput.setCustomValidity('Не должно быть одинаковых хештегов');
         return;
       }
-      hashtagsObj[hashtags[i]] = true;
-    }
+      hashtagsObj[hashtag] = true;
+    });
   };
 
   var onFieldEscPress = function (evt) {
@@ -57,5 +58,9 @@
   hashtagsInput.addEventListener('keydown', onFieldEscPress);
   commentsTextarea.addEventListener('keydown', onFieldEscPress);
   window.preview.uploadImageForm.addEventListener('submit', onUploadImageFormSubmit);
-  console.log(window.preview.uploadImageForm);
+
+  window.form = {
+    hashtagsInput: hashtagsInput,
+    commentsTextarea: commentsTextarea
+  };
 })();

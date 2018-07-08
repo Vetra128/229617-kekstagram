@@ -40,7 +40,7 @@
     for (var i = 0; i < count; i++) {
       fragment.appendChild(window.data.createPhoto(photos[i]));
     }
-    window.data.photoGalery.appendChild(fragment);
+    window.preview.photoGalery.appendChild(fragment);
   };
 
 
