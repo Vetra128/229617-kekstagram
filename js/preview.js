@@ -170,7 +170,7 @@
 
   var calculateScaleValue = function () {
     var scaleValuePercent;
-    if (scaleValue.value <= 100) {
+    if (scaleValue.value <= PERCENTS_MAX) {
       scaleValuePercent = (scaleValue.value <= 0) ? '0%' : (scaleValue.value + '%');
       scalePin.style.left = scaleValuePercent;
       scaleLevel.style.width = scaleValuePercent;
