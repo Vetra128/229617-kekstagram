@@ -4,7 +4,7 @@
   var URL_DATA = 'https://js.dump.academy/kekstagram/data';
   var URL_LOAD = 'https://js.dump.academy/kekstagram';
   var SUCCESS_CODE = 200;
-  var TIMEOUT = 10000; // 10s
+  var TIMEOUT = 10000;
 
   var getData = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
